@@ -19,7 +19,9 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
 
-  const params = req.query.params || [];
+  // Handle Vercel's catch-all parameter format (can be "params" or "...params", string or array)
+  const rawParams = req.query.params ?? req.query['...params'];
+  const params = Array.isArray(rawParams) ? rawParams : (rawParams ? [rawParams] : []);
 
   try {
     const { data, sha } = await getContentFromGitHub();

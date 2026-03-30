@@ -1,11 +1,9 @@
 import { getContentFromGitHub, saveContentToGitHub } from '../lib/github.js';
 
 export default async function handler(req, res) {
-  // Debug: log the entire query object
-  console.log('DEBUG req.query:', JSON.stringify(req.query));
-  console.log('DEBUG req.url:', req.url);
-
-  const slugParts = req.query.slug || [];
+  // Handle Vercel's catch-all parameter format (can be "slug" or "...slug", string or array)
+  const rawSlug = req.query.slug ?? req.query['...slug'];
+  const slugParts = Array.isArray(rawSlug) ? rawSlug : (rawSlug ? [rawSlug] : []);
 
   try {
     const { data, sha } = await getContentFromGitHub();

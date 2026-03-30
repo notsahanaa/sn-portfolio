@@ -5,8 +5,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Handle catch-all route - slug is an array
-  const slugParts = req.query.slug || [];
+  // Handle Vercel's catch-all parameter format (can be "slug" or "...slug", string or array)
+  const rawSlug = req.query.slug ?? req.query['...slug'];
+  const slugParts = Array.isArray(rawSlug) ? rawSlug : (rawSlug ? [rawSlug] : []);
   if (slugParts.length !== 1) {
     return res.status(404).json({ error: 'Not found' });
   }
