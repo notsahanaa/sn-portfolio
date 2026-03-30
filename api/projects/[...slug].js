@@ -18,12 +18,26 @@ export default async function handler(req, res) {
   try {
     const data = await readData();
 
+    // Defensive check: ensure data structure exists
+    if (!data || !data.buildInPublic || !Array.isArray(data.buildInPublic.projects)) {
+      console.error('Invalid data structure:', {
+        hasData: !!data,
+        hasBuildInPublic: !!(data && data.buildInPublic),
+        hasProjects: !!(data && data.buildInPublic && data.buildInPublic.projects)
+      });
+      return res.status(500).json({ error: 'Data structure error' });
+    }
+
     // GET /api/projects/[slug] - Get single project
     if (req.method === 'GET' && slugParts.length === 1) {
       const slug = slugParts[0];
       const project = data.buildInPublic.projects.find(p => p.slug === slug && p.visible);
 
       if (!project) {
+        console.error('Project not found:', {
+          requestedSlug: slug,
+          availableSlugs: data.buildInPublic.projects.map(p => p.slug)
+        });
         return res.status(404).json({ error: 'Project not found' });
       }
       return res.status(200).json(project);
