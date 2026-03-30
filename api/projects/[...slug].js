@@ -1,6 +1,10 @@
 import { getContentFromGitHub, saveContentToGitHub } from '../lib/github.js';
 
 export default async function handler(req, res) {
+  // Debug: log the entire query object
+  console.log('DEBUG req.query:', JSON.stringify(req.query));
+  console.log('DEBUG req.url:', req.url);
+
   const slugParts = req.query.slug || [];
 
   try {
