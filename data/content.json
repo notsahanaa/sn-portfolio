@@ -1,6 +1,16 @@
 {
   "writes": {
-    "topics": []
+    "topics": [
+      {
+        "id": "d1fc98af-236c-4a4f-9c30-fbb5c383e1d3",
+        "slug": "ai-and-self-actualization",
+        "name": "AI & Self Actualization",
+        "description": "A lot of people doomsday over Agentic AI. Over how AI is going to take over our jobs. I'm an optimist. Optimist? I'm actually excited as hell by Agentic ai. I think it brings us close to creative self-actualization. ",
+        "visible": true,
+        "order": 1,
+        "sections": []
+      }
+    ]
   },
   "buildInPublic": {
     "projects": [
