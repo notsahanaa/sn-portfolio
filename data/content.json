@@ -9,6 +9,15 @@
         "visible": true,
         "order": 1,
         "sections": []
+      },
+      {
+        "id": "b0f0e42c-e8f2-4c75-a330-a5f360b5d74b",
+        "slug": "ai-and-aesthetics",
+        "name": "AI & Aesthetics",
+        "description": "test",
+        "visible": true,
+        "order": 2,
+        "sections": []
       }
     ]
   },
