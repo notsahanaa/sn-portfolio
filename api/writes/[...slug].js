@@ -1,4 +1,4 @@
-import data from '../../data/content.json' with { type: 'json' };
+import { getContentFromGitHub } from '../lib/github.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
   const slug = slugParts[0];
 
   try {
+    const { data } = await getContentFromGitHub();
     const topic = data.writes.topics.find(t => t.slug === slug);
 
     if (!topic || !topic.visible) {

@@ -1,4 +1,4 @@
-import data from '../../data/content.json' with { type: 'json' };
+import { getContentFromGitHub } from '../lib/github.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -6,6 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    const { data } = await getContentFromGitHub();
     const topics = data.writes.topics
       .filter(t => t.visible)
       .sort((a, b) => a.order - b.order)
