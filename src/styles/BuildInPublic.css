@@ -1,0 +1,63 @@
+.build-in-public {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #000;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.build-in-public h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.page-description {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.loading, .error, .empty {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 3rem;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(490px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 400px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

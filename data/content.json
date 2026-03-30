@@ -1,0 +1,125 @@
+{
+  "buildInPublic": {
+    "projects": [
+      {
+        "id": "ba477d15-2cde-40e7-a828-25c05f47043d",
+        "slug": "sensei",
+        "name": "Sensei",
+        "description": "The first productivity tool that organises itself around your hustle. Complete your daily tasks; Sensei will give you insights into your workflow and project progress.",
+        "startDate": "2025-12-12",
+        "endDate": "2026-01-01",
+        "status": "idea",
+        "link": "",
+        "visible": true,
+        "likes": 0,
+        "tweets": [
+          {
+            "id": "4acde437-3fb4-4ff6-9aaa-8dd48d465c7d",
+            "tweetUrl": "https://x.com/sahananarenx/status/1999742734379504041",
+            "addedAt": "2026-03-24T21:01:35.497Z"
+          },
+          {
+            "id": "531cc354-73a1-4467-bbb1-9dabbc95b633",
+            "tweetUrl": "https://x.com/sahananarenx/status/2000403768882708549",
+            "addedAt": "2026-03-24T21:01:53.373Z"
+          },
+          {
+            "id": "5e663876-e1bd-4c1d-abed-2c9afdf0b80d",
+            "tweetUrl": "https://x.com/sahananarenx/status/2000861094961946817",
+            "addedAt": "2026-03-24T21:03:32.185Z"
+          },
+          {
+            "id": "aafa4e23-0d90-4d88-aa12-af4f89dd75da",
+            "tweetUrl": "https://x.com/sahananarenx/status/2001213615404134456",
+            "addedAt": "2026-03-24T21:04:13.181Z"
+          },
+          {
+            "id": "bc7dfdab-6476-41a3-86b3-1b05f5e8aadb",
+            "tweetUrl": "https://x.com/sahananarenx/status/2001556957879218457",
+            "addedAt": "2026-03-24T21:04:31.493Z"
+          },
+          {
+            "id": "e95c3f35-61ce-4cce-8bcc-2169dda99def",
+            "tweetUrl": "https://x.com/sahananarenx/status/2001931441442365859",
+            "addedAt": "2026-03-24T21:05:09.371Z"
+          },
+          {
+            "id": "78d83f9a-3af2-44cb-ad3c-762f6e67bbbe",
+            "tweetUrl": "https://x.com/sahananarenx/status/2002316392016867738",
+            "addedAt": "2026-03-24T21:05:22.182Z"
+          },
+          {
+            "id": "cd64f951-dc26-4d55-8680-7e3150f18c49",
+            "tweetUrl": "https://x.com/sahananarenx/status/2002680890280071259",
+            "addedAt": "2026-03-24T21:07:16.553Z"
+          },
+          {
+            "id": "b82668c8-8956-41bf-b659-1d6a770a504f",
+            "tweetUrl": "https://x.com/sahananarenx/status/2002996616832356357",
+            "addedAt": "2026-03-24T21:07:40.521Z"
+          },
+          {
+            "id": "9c682bab-b401-4ce8-952a-71eb2c1f193a",
+            "tweetUrl": "https://x.com/sahananarenx/status/2003374362318221431",
+            "addedAt": "2026-03-24T21:08:47.673Z"
+          },
+          {
+            "id": "f8bd65b9-44b6-4796-af99-2c6eff73ace3",
+            "tweetUrl": "https://x.com/sahananarenx/status/2003769571749335519",
+            "addedAt": "2026-03-24T21:09:06.982Z"
+          },
+          {
+            "id": "40603f05-ce5f-4126-a401-7c25a31b1ba6",
+            "tweetUrl": "https://x.com/sahananarenx/status/2004093511122214999",
+            "addedAt": "2026-03-24T21:09:36.190Z"
+          },
+          {
+            "id": "f6997bf2-5a04-4568-b98c-c0a4aeb41add",
+            "tweetUrl": "https://x.com/sahananarenx/status/2004480717963874335",
+            "addedAt": "2026-03-24T21:10:33.326Z"
+          },
+          {
+            "id": "0c27c689-3a63-471c-8aeb-2487640dbb71",
+            "tweetUrl": "https://x.com/sahananarenx/status/2004845844877771110",
+            "addedAt": "2026-03-24T21:10:47.834Z"
+          },
+          {
+            "id": "3efd7aed-d51c-449e-8f7b-b0f4280ecd0f",
+            "tweetUrl": "https://x.com/sahananarenx/status/2005207025911800004",
+            "addedAt": "2026-03-24T21:11:00.912Z"
+          },
+          {
+            "id": "9432e00d-6e15-4996-ae4f-a66b8b94efc4",
+            "tweetUrl": "https://x.com/sahananarenx/status/2005546033661829501",
+            "addedAt": "2026-03-24T21:11:38.337Z"
+          },
+          {
+            "id": "e69c3a33-0b2c-4457-8ddb-b03616ff67d0",
+            "tweetUrl": "https://x.com/sahananarenx/status/2005923133350400406",
+            "addedAt": "2026-03-24T21:11:48.639Z"
+          },
+          {
+            "id": "df86b9d0-ebd6-4834-ab45-2cc14c90d455",
+            "tweetUrl": "https://x.com/sahananarenx/status/2006290232539484541",
+            "addedAt": "2026-03-24T21:12:01.731Z"
+          },
+          {
+            "id": "b79aeca6-f92a-44d0-aab2-4601d2c4d424",
+            "tweetUrl": "https://x.com/sahananarenx/status/2006660356278726672",
+            "addedAt": "2026-03-24T21:12:50.182Z"
+          },
+          {
+            "id": "f4dddf1f-efed-47ee-8877-318da87a9f81",
+            "tweetUrl": "https://x.com/sahananarenx/status/2006994128534708349",
+            "addedAt": "2026-03-24T21:12:58.171Z"
+          },
+          {
+            "id": "a06a293d-4c33-4fa1-a8a3-fb4d79ed6065",
+            "tweetUrl": "https://x.com/sahananarenx/status/2009760187377451168",
+            "addedAt": "2026-03-24T21:13:04.597Z"
+          }
+        ]
+      }
+    ]
+  }
+}

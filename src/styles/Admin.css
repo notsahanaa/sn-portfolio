@@ -1,0 +1,278 @@
+.admin-page {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #000;
+}
+
+.admin-header h1 {
+  margin: 0;
+}
+
+.logout-btn {
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #000;
+  background: transparent;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.message {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid;
+}
+
+.message.error {
+  border-color: #e74c3c;
+  background: #ffeaea;
+  color: #e74c3c;
+}
+
+.message.success {
+  border-color: #27ae60;
+  background: #eafff0;
+  color: #27ae60;
+}
+
+.admin-section {
+  margin-bottom: 3rem;
+}
+
+.admin-section h2 {
+  margin-bottom: 1rem;
+}
+
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+}
+
+.project-form input,
+.project-form select,
+.project-form textarea {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  border: 2px solid #000;
+}
+
+.project-form input:focus,
+.project-form select:focus,
+.project-form textarea:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.checkbox-label {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-actions button,
+.project-actions button,
+.add-tweet button {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #000;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-actions button:hover,
+.project-actions button:hover,
+.add-tweet button:hover {
+  background: #fff;
+  color: #000;
+}
+
+.form-actions button:last-child {
+  background: transparent;
+  color: #000;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.project-item {
+  border: 2px solid #000;
+  padding: 1.5rem;
+}
+
+.project-item.hidden {
+  opacity: 0.6;
+  border-style: dashed;
+}
+
+.project-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-info h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.status-badge {
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid currentColor;
+}
+
+.status-in-progress { color: #27ae60; }
+.status-idea { color: #3498db; }
+.status-paused { color: #f39c12; }
+.status-completed { color: #9b59b6; }
+.status-abandoned { color: #95a5a6; }
+
+.hidden-badge {
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.project-actions button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.project-actions button.danger {
+  border-color: #e74c3c;
+  background: #e74c3c;
+}
+
+.project-actions button.danger:hover {
+  background: #fff;
+  color: #e74c3c;
+}
+
+.tweets-manager {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.tweets-manager h4 {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.add-tweet {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.add-tweet input {
+  flex: 1;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 2px solid #000;
+}
+
+.add-tweet button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.tweet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tweet-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+}
+
+.tweet-list a {
+  color: #3498db;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.tweet-list button.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  min-width: 2rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .project-actions {
+    flex-wrap: wrap;
+  }
+}

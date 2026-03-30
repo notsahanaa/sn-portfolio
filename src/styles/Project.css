@@ -1,0 +1,139 @@
+.project-page {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #000;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.project-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #000;
+}
+
+.project-header h1 {
+  margin-bottom: 1rem;
+}
+
+.project-description {
+  font-family: 'VT323', monospace;
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.project-meta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border: 2px solid currentColor;
+}
+
+.status-in-progress { color: #27ae60; }
+.status-idea { color: #3498db; }
+.status-paused { color: #f39c12; }
+.status-completed { color: #9b59b6; }
+.status-abandoned { color: #95a5a6; }
+
+.date-range {
+  color: #666;
+}
+
+.project-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.visit-link {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.visit-link:hover {
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+}
+
+.tweets-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+.no-tweets {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  padding: 3rem;
+  border: 2px dashed #ccc;
+}
+
+.tweets-timeline {
+  column-count: 3;
+  column-gap: 16px;
+}
+
+.tweets-timeline > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  display: inline-block;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .tweets-timeline {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .tweets-timeline {
+    column-count: 1;
+  }
+}
+
+.loading, .error {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 3rem;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
