@@ -1,18 +1,6 @@
-import fs from 'fs/promises';
-import path from 'path';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-
-const DATA_PATH = path.join(process.cwd(), 'data/content.json');
-
-async function readData() {
-  const content = await fs.readFile(DATA_PATH, 'utf-8');
-  return JSON.parse(content);
-}
-
-async function writeData(data) {
-  await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
-}
+import { getContentFromGitHub, saveContentToGitHub } from '../../lib/github.js';
 
 function authenticateToken(req) {
   const authHeader = req.headers['authorization'];
@@ -34,7 +22,7 @@ export default async function handler(req, res) {
   const params = req.query.params || [];
 
   try {
-    const data = await readData();
+    const { data, sha } = await getContentFromGitHub();
 
     // PUT /api/admin/writes/[id] - Update topic
     if (req.method === 'PUT' && params.length === 1) {
@@ -59,7 +47,7 @@ export default async function handler(req, res) {
       if (visible !== undefined) topic.visible = visible;
       if (order !== undefined) topic.order = order;
 
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Update topic: ${topic.name}`);
       return res.status(200).json(topic);
     }
 
@@ -72,8 +60,9 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Topic not found' });
       }
 
+      const topicName = data.writes.topics[index].name;
       data.writes.topics.splice(index, 1);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Delete topic: ${topicName}`);
       return res.status(200).json({ success: true });
     }
 
@@ -102,7 +91,7 @@ export default async function handler(req, res) {
       };
 
       topic.sections.push(newSection);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Add section to topic: ${topic.name}`);
       return res.status(201).json(newSection);
     }
 
@@ -125,7 +114,7 @@ export default async function handler(req, res) {
       if (content !== undefined) section.content = content;
       if (order !== undefined) section.order = order;
 
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Update section in topic: ${topic.name}`);
       return res.status(200).json(section);
     }
 
@@ -144,7 +133,7 @@ export default async function handler(req, res) {
       }
 
       topic.sections.splice(sectionIndex, 1);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Delete section from topic: ${topic.name}`);
       return res.status(200).json({ success: true });
     }
 

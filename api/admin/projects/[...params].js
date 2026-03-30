@@ -1,18 +1,6 @@
-import fs from 'fs/promises';
-import path from 'path';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-
-const DATA_PATH = path.join(process.cwd(), 'data/content.json');
-
-async function readData() {
-  const content = await fs.readFile(DATA_PATH, 'utf-8');
-  return JSON.parse(content);
-}
-
-async function writeData(data) {
-  await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
-}
+import { getContentFromGitHub, saveContentToGitHub } from '../../lib/github.js';
 
 function authenticateToken(req) {
   const authHeader = req.headers['authorization'];
@@ -34,7 +22,7 @@ export default async function handler(req, res) {
   const params = req.query.params || [];
 
   try {
-    const data = await readData();
+    const { data, sha } = await getContentFromGitHub();
 
     // PUT /api/admin/projects/[id] - Update project
     if (req.method === 'PUT' && params.length === 1) {
@@ -62,7 +50,7 @@ export default async function handler(req, res) {
       if (link !== undefined) project.link = link;
       if (visible !== undefined) project.visible = visible;
 
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Update project: ${project.name}`);
       return res.status(200).json(project);
     }
 
@@ -75,8 +63,9 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Project not found' });
       }
 
+      const projectName = data.buildInPublic.projects[index].name;
       data.buildInPublic.projects.splice(index, 1);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Delete project: ${projectName}`);
       return res.status(200).json({ success: true });
     }
 
@@ -106,7 +95,7 @@ export default async function handler(req, res) {
       };
 
       project.tweets.push(newTweet);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Add tweet to project: ${project.name}`);
       return res.status(201).json(newTweet);
     }
 
@@ -125,7 +114,7 @@ export default async function handler(req, res) {
       }
 
       project.tweets.splice(tweetIndex, 1);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Delete tweet from project: ${project.name}`);
       return res.status(200).json({ success: true });
     }
 

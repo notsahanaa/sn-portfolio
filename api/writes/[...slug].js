@@ -1,12 +1,4 @@
-import fs from 'fs/promises';
-import path from 'path';
-
-const DATA_PATH = path.join(process.cwd(), 'data/content.json');
-
-async function readData() {
-  const content = await fs.readFile(DATA_PATH, 'utf-8');
-  return JSON.parse(content);
-}
+import data from '../../data/content.json' with { type: 'json' };
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -21,7 +13,6 @@ export default async function handler(req, res) {
   const slug = slugParts[0];
 
   try {
-    const data = await readData();
     const topic = data.writes.topics.find(t => t.slug === slug);
 
     if (!topic || !topic.visible) {

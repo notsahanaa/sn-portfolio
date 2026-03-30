@@ -1,18 +1,6 @@
-import fs from 'fs/promises';
-import path from 'path';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-
-const DATA_PATH = path.join(process.cwd(), 'data/content.json');
-
-async function readData() {
-  const content = await fs.readFile(DATA_PATH, 'utf-8');
-  return JSON.parse(content);
-}
-
-async function writeData(data) {
-  await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
-}
+import { getContentFromGitHub, saveContentToGitHub } from '../../lib/github.js';
 
 function authenticateToken(req) {
   const authHeader = req.headers['authorization'];
@@ -32,7 +20,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const data = await readData();
+    const { data, sha } = await getContentFromGitHub();
 
     if (req.method === 'GET') {
       const topics = data.writes.topics.sort((a, b) => a.order - b.order);
@@ -63,7 +51,7 @@ export default async function handler(req, res) {
       };
 
       data.writes.topics.push(newTopic);
-      await writeData(data);
+      await saveContentToGitHub(data, sha, `Add topic: ${name}`);
       return res.status(201).json(newTopic);
     }
 
