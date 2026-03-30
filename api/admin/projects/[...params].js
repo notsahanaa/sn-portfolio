@@ -36,42 +36,6 @@ export default async function handler(req, res) {
   try {
     const data = await readData();
 
-    // GET /api/admin/projects - List all projects
-    if (req.method === 'GET' && params.length === 0) {
-      return res.status(200).json(data.buildInPublic.projects);
-    }
-
-    // POST /api/admin/projects - Create project
-    if (req.method === 'POST' && params.length === 0) {
-      const { name, slug, description, startDate, endDate, status, link, visible } = req.body;
-
-      if (!name || !slug) {
-        return res.status(400).json({ error: 'Name and slug are required' });
-      }
-
-      if (data.buildInPublic.projects.some(p => p.slug === slug)) {
-        return res.status(400).json({ error: 'Slug already exists' });
-      }
-
-      const newProject = {
-        id: uuidv4(),
-        slug,
-        name,
-        description: description || '',
-        startDate: startDate || new Date().toISOString().split('T')[0],
-        endDate: endDate || null,
-        status: status || 'idea',
-        link: link || '',
-        visible: visible !== false,
-        likes: 0,
-        tweets: []
-      };
-
-      data.buildInPublic.projects.push(newProject);
-      await writeData(data);
-      return res.status(201).json(newProject);
-    }
-
     // PUT /api/admin/projects/[id] - Update project
     if (req.method === 'PUT' && params.length === 1) {
       const id = params[0];

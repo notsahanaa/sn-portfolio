@@ -36,41 +36,6 @@ export default async function handler(req, res) {
   try {
     const data = await readData();
 
-    // GET /api/admin/writes - List all topics
-    if (req.method === 'GET' && params.length === 0) {
-      const topics = data.writes.topics.sort((a, b) => a.order - b.order);
-      return res.status(200).json(topics);
-    }
-
-    // POST /api/admin/writes - Create topic
-    if (req.method === 'POST' && params.length === 0) {
-      const { name, slug, description, visible } = req.body;
-
-      if (!name || !slug) {
-        return res.status(400).json({ error: 'Name and slug are required' });
-      }
-
-      if (data.writes.topics.some(t => t.slug === slug)) {
-        return res.status(400).json({ error: 'Slug already exists' });
-      }
-
-      const maxOrder = data.writes.topics.reduce((max, t) => Math.max(max, t.order || 0), 0);
-
-      const newTopic = {
-        id: uuidv4(),
-        slug,
-        name,
-        description: description || '',
-        visible: visible !== false,
-        order: maxOrder + 1,
-        sections: []
-      };
-
-      data.writes.topics.push(newTopic);
-      await writeData(data);
-      return res.status(201).json(newTopic);
-    }
-
     // PUT /api/admin/writes/[id] - Update topic
     if (req.method === 'PUT' && params.length === 1) {
       const id = params[0];

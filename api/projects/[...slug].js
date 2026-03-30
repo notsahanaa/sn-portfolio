@@ -13,20 +13,14 @@ async function writeData(data) {
 }
 
 export default async function handler(req, res) {
-  const params = req.query.params || [];
+  const slugParts = req.query.slug || [];
 
   try {
     const data = await readData();
 
-    // GET /api/projects - List all visible projects
-    if (req.method === 'GET' && params.length === 0) {
-      const projects = data.buildInPublic.projects.filter(p => p.visible);
-      return res.status(200).json(projects);
-    }
-
     // GET /api/projects/[slug] - Get single project
-    if (req.method === 'GET' && params.length === 1) {
-      const slug = params[0];
+    if (req.method === 'GET' && slugParts.length === 1) {
+      const slug = slugParts[0];
       const project = data.buildInPublic.projects.find(p => p.slug === slug && p.visible);
 
       if (!project) {
@@ -36,8 +30,8 @@ export default async function handler(req, res) {
     }
 
     // POST /api/projects/[slug]/like - Like a project
-    if (req.method === 'POST' && params.length === 2 && params[1] === 'like') {
-      const slug = params[0];
+    if (req.method === 'POST' && slugParts.length === 2 && slugParts[1] === 'like') {
+      const slug = slugParts[0];
       const project = data.buildInPublic.projects.find(p => p.slug === slug);
 
       if (!project) {
