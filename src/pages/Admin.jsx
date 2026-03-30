@@ -5,9 +5,17 @@ import {
   updateProject,
   deleteProject,
   addTweet,
-  removeTweet
+  removeTweet,
+  getAdminTopics,
+  createTopic,
+  updateTopic,
+  deleteTopic,
+  createSection,
+  updateSection,
+  deleteSection
 } from '../api/client'
 import AdminLogin from '../components/AdminLogin'
+import RichTextEditor from '../components/RichTextEditor'
 import '../styles/Admin.css'
 
 const INITIAL_PROJECT = {
@@ -21,8 +29,23 @@ const INITIAL_PROJECT = {
   visible: true
 }
 
+const INITIAL_TOPIC = {
+  name: '',
+  slug: '',
+  description: '',
+  visible: true
+}
+
+const INITIAL_SECTION = {
+  title: '',
+  content: ''
+}
+
 function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [activeTab, setActiveTab] = useState('projects')
+
+  // Projects state
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
   const [editingProject, setEditingProject] = useState(null)
@@ -30,6 +53,14 @@ function Admin() {
   const [newTweetUrl, setNewTweetUrl] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+
+  // Writes state
+  const [topics, setTopics] = useState([])
+  const [editingTopic, setEditingTopic] = useState(null)
+  const [topicFormData, setTopicFormData] = useState(INITIAL_TOPIC)
+  const [expandedTopic, setExpandedTopic] = useState(null)
+  const [editingSection, setEditingSection] = useState(null)
+  const [sectionFormData, setSectionFormData] = useState(INITIAL_SECTION)
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem('adminToken')
@@ -42,12 +73,26 @@ function Admin() {
       const data = await getAdminProjects()
       setProjects(data)
     } catch (err) {
-      if (err.message.includes('401') || err.message.includes('Authentication')) {
+      if (err.message.includes('401') || err.message.includes('Authentication') || err.message.includes('expired') || err.message.includes('Invalid')) {
         handleLogout()
+        return
       }
       setError(err.message)
     } finally {
       setLoading(false)
+    }
+  }, [handleLogout])
+
+  const fetchTopics = useCallback(async () => {
+    try {
+      const data = await getAdminTopics()
+      setTopics(data)
+    } catch (err) {
+      if (err.message.includes('401') || err.message.includes('Authentication') || err.message.includes('expired') || err.message.includes('Invalid')) {
+        handleLogout()
+        return
+      }
+      setError(err.message)
     }
   }, [handleLogout])
 
@@ -61,8 +106,9 @@ function Admin() {
   useEffect(() => {
     if (isLoggedIn) {
       fetchProjects()
+      fetchTopics()
     }
-  }, [isLoggedIn, fetchProjects])
+  }, [isLoggedIn, fetchProjects, fetchTopics])
 
   const showMessage = (msg, isError = false) => {
     if (isError) {
@@ -173,6 +219,129 @@ function Admin() {
     setFormData(INITIAL_PROJECT)
   }
 
+  // ============ WRITES HANDLERS ============
+
+  const handleCreateTopic = async (e) => {
+    e.preventDefault()
+    try {
+      const newTopic = await createTopic(topicFormData)
+      setTopics([...topics, newTopic])
+      setTopicFormData(INITIAL_TOPIC)
+      showMessage('Topic created!')
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const handleUpdateTopic = async (e) => {
+    e.preventDefault()
+    try {
+      const updated = await updateTopic(editingTopic.id, topicFormData)
+      setTopics(topics.map(t => t.id === updated.id ? updated : t))
+      setEditingTopic(null)
+      setTopicFormData(INITIAL_TOPIC)
+      showMessage('Topic updated!')
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const handleDeleteTopic = async (id) => {
+    if (!confirm('Delete this topic and all its sections?')) return
+    try {
+      await deleteTopic(id)
+      setTopics(topics.filter(t => t.id !== id))
+      if (expandedTopic === id) setExpandedTopic(null)
+      showMessage('Topic deleted!')
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const handleToggleTopicVisibility = async (topic) => {
+    try {
+      const updated = await updateTopic(topic.id, { visible: !topic.visible })
+      setTopics(topics.map(t => t.id === updated.id ? updated : t))
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const startEditingTopic = (topic) => {
+    setEditingTopic(topic)
+    setTopicFormData({
+      name: topic.name,
+      slug: topic.slug,
+      description: topic.description || '',
+      visible: topic.visible
+    })
+  }
+
+  const cancelEditingTopic = () => {
+    setEditingTopic(null)
+    setTopicFormData(INITIAL_TOPIC)
+  }
+
+  // Section handlers
+  const handleCreateSection = async (topicId) => {
+    try {
+      const newSection = await createSection(topicId, sectionFormData)
+      setTopics(topics.map(t =>
+        t.id === topicId
+          ? { ...t, sections: [...(t.sections || []), newSection] }
+          : t
+      ))
+      setSectionFormData(INITIAL_SECTION)
+      showMessage('Section created!')
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const handleUpdateSection = async (topicId) => {
+    try {
+      const updated = await updateSection(topicId, editingSection.id, sectionFormData)
+      setTopics(topics.map(t =>
+        t.id === topicId
+          ? { ...t, sections: t.sections.map(s => s.id === updated.id ? updated : s) }
+          : t
+      ))
+      setEditingSection(null)
+      setSectionFormData(INITIAL_SECTION)
+      showMessage('Section updated!')
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const handleDeleteSection = async (topicId, sectionId) => {
+    if (!confirm('Delete this section?')) return
+    try {
+      await deleteSection(topicId, sectionId)
+      setTopics(topics.map(t =>
+        t.id === topicId
+          ? { ...t, sections: t.sections.filter(s => s.id !== sectionId) }
+          : t
+      ))
+      showMessage('Section deleted!')
+    } catch (err) {
+      showMessage(err.message, true)
+    }
+  }
+
+  const startEditingSection = (section) => {
+    setEditingSection(section)
+    setSectionFormData({
+      title: section.title,
+      content: section.content || ''
+    })
+  }
+
+  const cancelEditingSection = () => {
+    setEditingSection(null)
+    setSectionFormData(INITIAL_SECTION)
+  }
+
   if (!isLoggedIn) {
     return (
       <div className="admin-page">
@@ -188,9 +357,26 @@ function Admin() {
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </header>
 
+      <nav className="admin-tabs">
+        <button
+          className={activeTab === 'projects' ? 'active' : ''}
+          onClick={() => setActiveTab('projects')}
+        >
+          Projects
+        </button>
+        <button
+          className={activeTab === 'writes' ? 'active' : ''}
+          onClick={() => setActiveTab('writes')}
+        >
+          Writes
+        </button>
+      </nav>
+
       {error && <div className="message error">{error}</div>}
       {success && <div className="message success">{success}</div>}
 
+      {activeTab === 'projects' && (
+      <>
       <section className="admin-section">
         <h2>{editingProject ? 'Edit Project' : 'New Project'}</h2>
         <form onSubmit={editingProject ? handleUpdateProject : handleCreateProject} className="project-form">
@@ -313,6 +499,148 @@ function Admin() {
           </div>
         )}
       </section>
+      </>
+      )}
+
+      {activeTab === 'writes' && (
+      <>
+      <section className="admin-section">
+        <h2>{editingTopic ? 'Edit Topic' : 'New Topic'}</h2>
+        <form onSubmit={editingTopic ? handleUpdateTopic : handleCreateTopic} className="project-form">
+          <div className="form-row">
+            <input
+              type="text"
+              placeholder="Topic Name"
+              value={topicFormData.name}
+              onChange={(e) => setTopicFormData({...topicFormData, name: e.target.value})}
+              required
+            />
+            <input
+              type="text"
+              placeholder="slug-for-url"
+              value={topicFormData.slug}
+              onChange={(e) => setTopicFormData({...topicFormData, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-')})}
+              required
+            />
+          </div>
+          <textarea
+            placeholder="Description (optional)"
+            value={topicFormData.description}
+            onChange={(e) => setTopicFormData({...topicFormData, description: e.target.value})}
+            rows={2}
+          />
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={topicFormData.visible}
+              onChange={(e) => setTopicFormData({...topicFormData, visible: e.target.checked})}
+            />
+            Visible to public
+          </label>
+          <div className="form-actions">
+            <button type="submit">{editingTopic ? 'Update' : 'Create'} Topic</button>
+            {editingTopic && <button type="button" onClick={cancelEditingTopic}>Cancel</button>}
+          </div>
+        </form>
+      </section>
+
+      <section className="admin-section">
+        <h2>Topics ({topics.length})</h2>
+        {topics.length === 0 ? (
+          <p>No topics yet.</p>
+        ) : (
+          <div className="projects-list">
+            {topics.map(topic => (
+              <div key={topic.id} className={`project-item ${!topic.visible ? 'hidden' : ''}`}>
+                <div className="project-info">
+                  <h3>{topic.name}</h3>
+                  {!topic.visible && <span className="hidden-badge">Hidden</span>}
+                  <span className="section-count">{topic.sections?.length || 0} sections</span>
+                </div>
+                <div className="project-actions">
+                  <button onClick={() => handleToggleTopicVisibility(topic)}>
+                    {topic.visible ? 'Hide' : 'Show'}
+                  </button>
+                  <button onClick={() => startEditingTopic(topic)}>Edit</button>
+                  <button onClick={() => setExpandedTopic(expandedTopic === topic.id ? null : topic.id)}>
+                    {expandedTopic === topic.id ? 'Collapse' : 'Sections'}
+                  </button>
+                  <button onClick={() => handleDeleteTopic(topic.id)} className="danger">Delete</button>
+                </div>
+
+                {expandedTopic === topic.id && (
+                  <div className="sections-manager">
+                    <h4>Sections</h4>
+
+                    {/* Section form */}
+                    <div className="section-form">
+                      <input
+                        type="text"
+                        placeholder="Section Title"
+                        value={editingSection?.id ? '' : sectionFormData.title}
+                        onChange={(e) => !editingSection && setSectionFormData({...sectionFormData, title: e.target.value})}
+                        disabled={!!editingSection}
+                      />
+                      {!editingSection && (
+                        <>
+                          <RichTextEditor
+                            content={sectionFormData.content}
+                            onChange={(content) => setSectionFormData({...sectionFormData, content})}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleCreateSection(topic.id)}
+                            disabled={!sectionFormData.title.trim()}
+                          >
+                            Add Section
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Sections list */}
+                    {topic.sections && topic.sections.length > 0 && (
+                      <ul className="section-list">
+                        {topic.sections.sort((a, b) => a.order - b.order).map(section => (
+                          <li key={section.id} className="section-item-admin">
+                            {editingSection?.id === section.id ? (
+                              <div className="section-edit-form">
+                                <input
+                                  type="text"
+                                  value={sectionFormData.title}
+                                  onChange={(e) => setSectionFormData({...sectionFormData, title: e.target.value})}
+                                />
+                                <RichTextEditor
+                                  content={sectionFormData.content}
+                                  onChange={(content) => setSectionFormData({...sectionFormData, content})}
+                                />
+                                <div className="section-edit-actions">
+                                  <button type="button" onClick={() => handleUpdateSection(topic.id)}>Save</button>
+                                  <button type="button" onClick={cancelEditingSection}>Cancel</button>
+                                </div>
+                              </div>
+                            ) : (
+                              <>
+                                <span className="section-title">{section.title}</span>
+                                <div className="section-actions">
+                                  <button onClick={() => startEditingSection(section)}>Edit</button>
+                                  <button onClick={() => handleDeleteSection(topic.id, section.id)} className="danger small">Delete</button>
+                                </div>
+                              </>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+      </>
+      )}
     </div>
   )
 }

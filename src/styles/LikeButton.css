@@ -6,14 +6,15 @@
   font-family: 'VT323', monospace;
   font-size: 1.2rem;
   background: transparent;
-  border: 2px solid #000;
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .like-button:hover:not(:disabled) {
-  background: #000;
-  color: #fff;
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
 .like-button:disabled {
@@ -21,8 +22,8 @@
 }
 
 .like-button.liked {
-  border-color: #e74c3c;
-  color: #e74c3c;
+  border-color: var(--color-error);
+  color: var(--color-error);
 }
 
 .like-button.liked .heart {

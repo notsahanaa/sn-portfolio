@@ -67,3 +67,66 @@ export const addTweet = (projectId, tweetUrl) =>
 
 export const removeTweet = (projectId, tweetId) =>
   request(`/admin/projects/${projectId}/tweets/${tweetId}`, { method: 'DELETE' });
+
+// ============ WRITES ENDPOINTS ============
+
+// Public
+export const getTopics = () => request('/writes');
+
+export const getTopic = (slug) => request(`/writes/${slug}`);
+
+// Admin - Topics
+export const getAdminTopics = () => request('/admin/writes');
+
+export const createTopic = (data) =>
+  request('/admin/writes', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+
+export const updateTopic = (id, data) =>
+  request(`/admin/writes/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+
+export const deleteTopic = (id) =>
+  request(`/admin/writes/${id}`, { method: 'DELETE' });
+
+// Admin - Sections
+export const createSection = (topicId, data) =>
+  request(`/admin/writes/${topicId}/sections`, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+
+export const updateSection = (topicId, sectionId, data) =>
+  request(`/admin/writes/${topicId}/sections/${sectionId}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+
+export const deleteSection = (topicId, sectionId) =>
+  request(`/admin/writes/${topicId}/sections/${sectionId}`, { method: 'DELETE' });
+
+// Admin - Uploads
+export const uploadImage = async (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const token = localStorage.getItem('adminToken');
+  const response = await fetch('/api/admin/uploads', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    body: formData
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Upload failed' }));
+    throw new Error(error.error || 'Upload failed');
+  }
+
+  return response.json();
+};

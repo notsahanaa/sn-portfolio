@@ -1,0 +1,19 @@
+.theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--color-text);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+}

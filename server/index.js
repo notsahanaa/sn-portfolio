@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import projectsRouter from './routes/projects.js';
 import authRouter from './routes/auth.js';
 import adminRouter from './routes/admin.js';
+import writesRouter from './routes/writes.js';
+import uploadsRouter from './routes/uploads.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +32,11 @@ app.get('/api/health', (req, res) => {
 app.use('/api/projects', projectsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/writes', writesRouter);
+app.use('/api/admin/uploads', uploadsRouter);
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {

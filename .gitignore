@@ -25,3 +25,7 @@ dist-ssr
 
 # Environment
 .env
+
+# Uploads (keep directory, ignore uploaded files)
+public/uploads/*
+!public/uploads/.gitkeep

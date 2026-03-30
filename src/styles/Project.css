@@ -3,17 +3,18 @@
   padding: 2rem;
   max-width: 900px;
   margin: 0 auto;
+  background-color: var(--color-bg);
 }
 
 .breadcrumb {
   font-family: 'VT323', monospace;
   font-size: 1rem;
   margin-bottom: 2rem;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .breadcrumb a {
-  color: #000;
+  color: var(--color-text);
 }
 
 .breadcrumb a:hover {
@@ -23,7 +24,7 @@
 .project-header {
   margin-bottom: 3rem;
   padding-bottom: 2rem;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .project-header h1 {
@@ -33,7 +34,7 @@
 .project-description {
   font-family: 'VT323', monospace;
   font-size: 1.3rem;
-  color: #333;
+  color: var(--color-text);
   margin-bottom: 1.5rem;
   line-height: 1.4;
 }
@@ -52,14 +53,14 @@
   border: 2px solid currentColor;
 }
 
-.status-in-progress { color: #27ae60; }
-.status-idea { color: #3498db; }
+.status-in-progress { color: var(--color-success); }
+.status-idea { color: var(--color-link); }
 .status-paused { color: #f39c12; }
 .status-completed { color: #9b59b6; }
 .status-abandoned { color: #95a5a6; }
 
 .date-range {
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .project-actions {
@@ -72,13 +73,13 @@
   font-family: 'VT323', monospace;
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
-  border: 2px solid #000;
+  border: 2px solid var(--color-border);
   transition: all 0.2s ease;
 }
 
 .visit-link:hover {
-  background: #000;
-  color: #fff;
+  background: var(--color-text);
+  color: var(--color-bg);
   text-decoration: none;
 }
 
@@ -89,10 +90,10 @@
 .no-tweets {
   font-family: 'VT323', monospace;
   font-size: 1.2rem;
-  color: #666;
+  color: var(--color-text-muted);
   text-align: center;
   padding: 3rem;
-  border: 2px dashed #ccc;
+  border: 2px dashed var(--color-border-light);
 }
 
 .tweets-timeline {
@@ -127,7 +128,7 @@
 }
 
 .error {
-  color: #e74c3c;
+  color: var(--color-error);
 }
 
 .back-link {

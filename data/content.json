@@ -1,4 +1,7 @@
 {
+  "writes": {
+    "topics": []
+  },
   "buildInPublic": {
     "projects": [
       {

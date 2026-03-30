@@ -26,3 +26,18 @@ export function findProjectBySlug(data, slug) {
 export function findProjectById(data, id) {
   return data.buildInPublic.projects.find(p => p.id === id);
 }
+
+// Writes functions
+export function getVisibleTopics(data) {
+  return data.writes.topics
+    .filter(t => t.visible)
+    .sort((a, b) => a.order - b.order);
+}
+
+export function findTopicBySlug(data, slug) {
+  return data.writes.topics.find(t => t.slug === slug);
+}
+
+export function findTopicById(data, id) {
+  return data.writes.topics.find(t => t.id === id);
+}

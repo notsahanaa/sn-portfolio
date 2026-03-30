@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
+import { useTheme } from '../context/ThemeContext'
 import '../styles/TweetEmbed.css'
 
 function TweetEmbed({ tweetUrl }) {
@@ -6,6 +7,7 @@ function TweetEmbed({ tweetUrl }) {
   const tweetContainerRef = useRef(null)
   const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
+  const { isDark } = useTheme()
 
   // Extract tweet ID outside effect
   const tweetId = useMemo(() => {
@@ -22,6 +24,12 @@ function TweetEmbed({ tweetUrl }) {
     }
 
     let cancelled = false
+    let hasStartedLoading = false
+
+    // Clear previous tweet when theme changes
+    if (tweetContainerRef.current) {
+      tweetContainerRef.current.innerHTML = ''
+    }
 
     // Load Twitter widget script if not already loaded
     const loadTwitterWidget = () => {
@@ -55,12 +63,20 @@ function TweetEmbed({ tweetUrl }) {
     }
 
     const embedTweet = async () => {
+      if (!hasStartedLoading) {
+        hasStartedLoading = true
+        // Set loading state via a microtask to avoid sync setState in effect
+        Promise.resolve().then(() => {
+          if (!cancelled) setIsLoading(true)
+        })
+      }
+
       try {
         const twttr = await loadTwitterWidget()
 
         if (!cancelled && tweetContainerRef.current) {
           const tweet = await twttr.widgets.createTweet(tweetId, tweetContainerRef.current, {
-            theme: 'light',
+            theme: isDark ? 'dark' : 'light',
             width: '100%'
           })
 
@@ -100,7 +116,7 @@ function TweetEmbed({ tweetUrl }) {
       cancelled = true
       observer.disconnect()
     }
-  }, [tweetId, isValidUrl])
+  }, [tweetId, isValidUrl, isDark])
 
   if (!isValidUrl || loadError) {
     return (

@@ -2,7 +2,7 @@
 h1, h2, h3 {
   font-family: 'VT323', monospace;
   font-weight: 400;
-  color: #000000;
+  color: var(--color-text);
   letter-spacing: 0.1em;
 }
 

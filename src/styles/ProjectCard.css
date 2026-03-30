@@ -1,12 +1,13 @@
 .project-card {
-  border: 2px solid #000;
+  border: 2px solid var(--color-border);
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-bg);
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: 4px 4px 0 var(--color-border);
 }
 
 .card-link {
@@ -23,7 +24,7 @@
 .card-description {
   font-family: 'VT323', monospace;
   font-size: 1.1rem;
-  color: #333;
+  color: var(--color-text);
   margin: 0 0 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -45,14 +46,14 @@
   border: 1px solid currentColor;
 }
 
-.status-in-progress { color: #27ae60; }
-.status-idea { color: #3498db; }
+.status-in-progress { color: var(--color-success); }
+.status-idea { color: var(--color-link); }
 .status-paused { color: #f39c12; }
 .status-completed { color: #9b59b6; }
 .status-abandoned { color: #95a5a6; }
 
 .date-range {
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .card-footer {
@@ -60,19 +61,19 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-border-light);
 }
 
 .external-link {
   font-family: 'VT323', monospace;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
-  border: 2px solid #000;
+  border: 2px solid var(--color-border);
   transition: all 0.2s ease;
 }
 
 .external-link:hover {
-  background: #000;
-  color: #fff;
+  background: var(--color-text);
+  color: var(--color-bg);
   text-decoration: none;
 }
