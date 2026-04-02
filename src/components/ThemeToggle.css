@@ -1,19 +1,20 @@
 .theme-toggle {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
-  padding: 0.4rem 0.8rem;
-  border: 2px solid var(--color-text);
+  top: 2rem;
+  right: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
   background: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-body);
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 1000;
+  border-radius: 4px;
 }
 
 .theme-toggle:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
+  color: var(--color-heading);
+  border-color: var(--color-heading);
 }
