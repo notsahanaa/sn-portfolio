@@ -6,7 +6,7 @@
   min-height: 100vh;
   width: 100%;
   background-color: var(--color-bg);
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .home-intro {
@@ -15,25 +15,23 @@
 }
 
 .home-intro h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .home-intro p {
-  font-family: 'VT323', monospace;
-  font-size: 1.4rem;
-  line-height: 1.6;
-  color: var(--color-text);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-body);
 }
 
 .inline-link {
+  color: var(--color-heading);
   text-decoration: underline;
-  color: var(--color-text);
-  transition: all 0.2s ease;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
 }
 
 .inline-link:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
-  text-decoration: none;
-  padding: 0 0.2rem;
+  opacity: 0.7;
+  text-decoration: underline;
 }
