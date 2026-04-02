@@ -6,11 +6,11 @@ import TweetEmbed from '../components/TweetEmbed'
 import '../styles/Project.css'
 
 const STATUS_LABELS = {
-  'idea': 'Idea',
-  'in-progress': 'In Progress',
-  'paused': 'Paused',
-  'completed': 'Completed',
-  'abandoned': 'Abandoned'
+  'idea': 'idea',
+  'in-progress': 'in progress',
+  'paused': 'paused',
+  'completed': 'completed',
+  'abandoned': 'abandoned'
 }
 
 function Project() {
@@ -34,18 +34,18 @@ function Project() {
   }, [slug])
 
   const formatDate = (dateStr) => {
-    if (!dateStr) return 'Present'
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    })
+    if (!dateStr) return 'present'
+    const date = new Date(dateStr)
+    const month = date.toLocaleDateString('en-US', { month: 'long' }).toLowerCase()
+    const day = date.getDate()
+    const year = date.getFullYear()
+    return `${month} ${day}, ${year}`
   }
 
   if (loading) {
     return (
       <div className="project-page">
-        <p className="loading">Loading project...</p>
+        <p className="loading">loading project...</p>
       </div>
     )
   }
@@ -54,10 +54,10 @@ function Project() {
     return (
       <div className="project-page">
         <nav className="breadcrumb">
-          <Link to="/">Home</Link> / <Link to="/projects">Projects</Link> / <span>Not Found</span>
+          <Link to="/">home</Link> / <Link to="/projects">projects</Link> / <span>not found</span>
         </nav>
-        <p className="error">Project not found</p>
-        <Link to="/projects" className="back-link">← Back to projects</Link>
+        <p className="error">project not found</p>
+        <Link to="/projects" className="back-link">← back to projects</Link>
       </div>
     )
   }
@@ -65,7 +65,7 @@ function Project() {
   return (
     <div className="project-page">
       <nav className="breadcrumb">
-        <Link to="/">Home</Link> / <Link to="/projects">Projects</Link> / <span>{project.name}</span>
+        <Link to="/">home</Link> / <Link to="/projects">projects</Link> / <span>{project.name}</span>
       </nav>
 
       <header className="project-header">
@@ -90,16 +90,16 @@ function Project() {
               rel="noopener noreferrer"
               className="visit-link"
             >
-              Visit Project →
+              visit project →
             </a>
           )}
         </div>
       </header>
 
       <section className="tweets-section">
-        <h2>Updates</h2>
+        <h2>updates</h2>
         {project.tweets.length === 0 ? (
-          <p className="no-tweets">No updates yet. Check back soon!</p>
+          <p className="no-tweets">no updates yet. check back soon!</p>
         ) : (
           <div className="tweets-timeline">
             {project.tweets.map(tweet => (
