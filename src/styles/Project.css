@@ -1,30 +1,29 @@
 .project-page {
   min-height: 100vh;
-  padding: 2rem;
+  padding: 4rem 3rem;
   max-width: 900px;
   margin: 0 auto;
   background-color: var(--color-bg);
 }
 
 .breadcrumb {
-  font-family: 'VT323', monospace;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 3rem;
+  color: var(--color-muted);
 }
 
 .breadcrumb a {
-  color: var(--color-text);
+  color: var(--color-body);
 }
 
 .breadcrumb a:hover {
-  text-decoration: underline;
+  color: var(--color-heading);
 }
 
 .project-header {
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .project-header h1 {
@@ -32,78 +31,73 @@
 }
 
 .project-description {
-  font-family: 'VT323', monospace;
-  font-size: 1.3rem;
-  color: var(--color-text);
-  margin-bottom: 1.5rem;
-  line-height: 1.4;
+  font-size: 1.1rem;
+  color: var(--color-body);
+  margin-bottom: 2rem;
+  line-height: 1.7;
 }
 
 .project-meta {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  margin-bottom: 1.5rem;
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
 }
 
 .status-badge {
   padding: 0.25rem 0.75rem;
-  border: 2px solid currentColor;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
 }
 
 .status-in-progress { color: var(--color-success); }
 .status-idea { color: var(--color-link); }
-.status-paused { color: #f39c12; }
-.status-completed { color: #9b59b6; }
-.status-abandoned { color: #95a5a6; }
+.status-paused { color: #f59e0b; }
+.status-completed { color: #8b5cf6; }
+.status-abandoned { color: var(--color-muted); }
 
 .date-range {
-  color: var(--color-text-muted);
+  color: var(--color-muted);
 }
 
 .project-actions {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
 .visit-link {
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--color-border);
-  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  color: var(--color-body);
+  transition: color 0.2s ease;
 }
 
 .visit-link:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
-  text-decoration: none;
+  color: var(--color-heading);
 }
 
 .tweets-section h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .no-tweets {
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  color: var(--color-text-muted);
+  font-size: 1rem;
+  color: var(--color-muted);
   text-align: center;
-  padding: 3rem;
-  border: 2px dashed var(--color-border-light);
+  padding: 4rem;
 }
 
 .tweets-timeline {
   column-count: 3;
-  column-gap: 16px;
+  column-gap: 24px;
 }
 
 .tweets-timeline > * {
   break-inside: avoid;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   display: inline-block;
   width: 100%;
 }
@@ -115,16 +109,20 @@
 }
 
 @media (max-width: 640px) {
+  .project-page {
+    padding: 3rem 1.5rem;
+  }
+
   .tweets-timeline {
     column-count: 1;
   }
 }
 
 .loading, .error {
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
-  padding: 3rem;
+  padding: 4rem;
+  color: var(--color-muted);
 }
 
 .error {
@@ -134,7 +132,11 @@
 .back-link {
   display: block;
   text-align: center;
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  margin-top: 1rem;
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
+  color: var(--color-body);
+}
+
+.back-link:hover {
+  color: var(--color-heading);
 }
