@@ -26,20 +26,20 @@ function BuildInPublic() {
   return (
     <div className="build-in-public">
       <nav className="breadcrumb">
-        <Link to="/">Home</Link> / <span>Build in Public</span>
+        <Link to="/">home</Link> / <span>build in public</span>
       </nav>
 
-      <h1>Build in Public</h1>
+      <h1>build in public</h1>
       <p className="page-description">
-        Follow along as I build projects in the open, sharing progress, learnings, and updates.
+        follow along as i build projects in the open, sharing progress, learnings, and updates.
       </p>
 
-      {loading && <p className="loading">Loading projects...</p>}
+      {loading && <p className="loading">loading projects...</p>}
 
-      {error && <p className="error">Error: {error}</p>}
+      {error && <p className="error">error: {error}</p>}
 
       {!loading && !error && projects.length === 0 && (
-        <p className="empty">No projects yet. Check back soon!</p>
+        <p className="empty">no projects yet. check back soon!</p>
       )}
 
       {!loading && !error && projects.length > 0 && (
