@@ -19,8 +19,9 @@
 }
 
 .home-intro p {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  line-height: 1.6;
   color: var(--color-body);
 }
 
