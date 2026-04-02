@@ -1,13 +1,12 @@
 .project-card {
-  border: 2px solid var(--color-border);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 2rem;
+  transition: transform 0.2s ease;
   background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 4px 4px 0 var(--color-border);
+  transform: translateX(4px);
 }
 
 .card-link {
@@ -17,63 +16,63 @@
 }
 
 .card-title {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem;
   font-size: 1.5rem;
 }
 
 .card-description {
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
-  color: var(--color-text);
-  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--color-body);
+  margin: 0 0 1.25rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  line-height: 1.6;
 }
 
 .card-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'VT323', monospace;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
 }
 
 .status-badge {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid currentColor;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+  color: var(--color-muted);
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
 }
 
 .status-in-progress { color: var(--color-success); }
 .status-idea { color: var(--color-link); }
-.status-paused { color: #f39c12; }
-.status-completed { color: #9b59b6; }
-.status-abandoned { color: #95a5a6; }
+.status-paused { color: #f59e0b; }
+.status-completed { color: #8b5cf6; }
+.status-abandoned { color: var(--color-muted); }
 
 .date-range {
-  color: var(--color-text-muted);
+  color: var(--color-muted);
 }
 
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--color-border-light);
 }
 
 .external-link {
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--color-border);
-  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  color: var(--color-body);
+  transition: color 0.2s ease;
 }
 
 .external-link:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
+  color: var(--color-heading);
   text-decoration: none;
 }
