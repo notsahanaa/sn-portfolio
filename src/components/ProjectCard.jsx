@@ -3,22 +3,22 @@ import LikeButton from './LikeButton'
 import '../styles/ProjectCard.css'
 
 const STATUS_LABELS = {
-  'idea': 'Idea',
-  'in-progress': 'In Progress',
-  'paused': 'Paused',
-  'completed': 'Completed',
-  'abandoned': 'Abandoned'
+  'idea': 'idea',
+  'in-progress': 'in progress',
+  'paused': 'paused',
+  'completed': 'completed',
+  'abandoned': 'abandoned'
 }
 
 function ProjectCard({ project }) {
   const { slug, name, description, startDate, endDate, status, link, likes } = project
 
   const formatDate = (dateStr) => {
-    if (!dateStr) return 'Present'
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      month: 'short',
-      year: 'numeric'
-    })
+    if (!dateStr) return 'present'
+    const date = new Date(dateStr)
+    const month = date.toLocaleDateString('en-US', { month: 'short' }).toLowerCase()
+    const year = date.getFullYear()
+    return `${month} ${year}`
   }
 
   return (
@@ -45,7 +45,7 @@ function ProjectCard({ project }) {
             className="external-link"
             onClick={(e) => e.stopPropagation()}
           >
-            Visit →
+            visit →
           </a>
         )}
       </div>
