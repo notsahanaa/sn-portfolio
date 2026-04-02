@@ -7,7 +7,7 @@ function Home() {
       <div className="home-intro">
         <h1>i'm sahanaa :)</h1>
         <p>
-          i <Link to="/projects" className="inline-link">build ai products in public</Link> + <Link to="/writes" className="inline-link">write about agentic ai</Link>
+          i <Link to="/projects" className="inline-link">build AI products in public</Link> + <Link to="/writes" className="inline-link">write about agentic AI</Link>
         </p>
       </div>
     </div>
