@@ -29,3 +29,8 @@ dist-ssr
 # Uploads (keep directory, ignore uploaded files)
 public/uploads/*
 !public/uploads/.gitkeep
+
+# Local planning/config files
+.superpowers/
+design.md
+docs/superpowers/
