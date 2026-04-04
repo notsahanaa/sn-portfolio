@@ -4,6 +4,23 @@
   max-width: 900px;
   margin: 0 auto;
   background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-logged-in {
+  text-align: center;
+}
+
+.admin-logged-in p {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.admin-logged-in .logout-btn {
+  margin-top: 1rem;
 }
 
 .admin-header {

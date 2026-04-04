@@ -36,6 +36,24 @@
   overflow-y: auto;
 }
 
+.sidebar-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-header p {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
 .current-topic {
   margin-bottom: 3rem;
   padding-bottom: 2rem;
@@ -52,6 +70,115 @@
   color: var(--color-muted);
   margin: 0;
   line-height: 1.6;
+}
+
+/* Topic detail */
+.topic-detail {
+  max-width: 100%;
+}
+
+.topic-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.topic-header h2,
+.topic-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.topic-header p,
+.topic-description {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.topic-content {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.hidden-indicator {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+/* Editor save bar */
+.editor-save-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-secondary, var(--color-bg));
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.save-status {
+  font-size: 0.85rem;
+}
+
+.saving-text {
+  color: var(--color-muted);
+}
+
+.unsaved-text {
+  color: #f59e0b;
+}
+
+.saved-text {
+  color: var(--color-success, #22c55e);
+}
+
+.save-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.save-button,
+.discard-button {
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-button {
+  background: var(--color-heading);
+  color: var(--color-bg);
+  border: none;
+}
+
+.save-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.discard-button {
+  background: transparent;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+}
+
+.discard-button:hover:not(:disabled) {
+  border-color: var(--color-muted);
+}
+
+.edit-mode-editor .rich-text-editor {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .topic-list {

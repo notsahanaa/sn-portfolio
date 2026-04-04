@@ -1,0 +1,334 @@
+/* Edit Mode Button */
+.edit-mode-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-text);
+  color: var(--color-background);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 1000;
+}
+
+.edit-mode-button:hover {
+  transform: scale(1.05);
+}
+
+.edit-mode-button.active {
+  background: var(--color-accent, #3b82f6);
+  color: white;
+}
+
+.edit-mode-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Editable Text */
+.editable-text-input {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed var(--color-text-muted, #666);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.editable-text-input:focus {
+  border-bottom-color: var(--color-accent, #3b82f6);
+  border-bottom-style: solid;
+}
+
+.editable-text-input::placeholder {
+  color: var(--color-text-muted, #666);
+  opacity: 0.6;
+}
+
+textarea.editable-text-input {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Inline Form */
+.inline-form {
+  background: var(--color-surface, var(--color-background));
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inline-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inline-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inline-form-field label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #666);
+  text-transform: lowercase;
+}
+
+.inline-form-field input,
+.inline-form-field textarea,
+.inline-form-field select {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: 4px;
+  background: var(--color-background);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.inline-form-field input:focus,
+.inline-form-field textarea:focus,
+.inline-form-field select:focus {
+  border-color: var(--color-accent, #3b82f6);
+}
+
+.inline-form-field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.inline-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.inline-form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-form-checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.inline-form-checkbox label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.inline-form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.inline-form-submit,
+.inline-form-cancel {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.inline-form-submit {
+  background: var(--color-text);
+  color: var(--color-background);
+  border: none;
+}
+
+.inline-form-submit:hover {
+  opacity: 0.9;
+}
+
+.inline-form-cancel {
+  background: transparent;
+  color: var(--color-text-muted, #666);
+  border: 1px solid var(--color-border, #e5e5e5);
+}
+
+.inline-form-cancel:hover {
+  background: var(--color-surface, var(--color-background));
+}
+
+/* Sidebar Item Controls */
+.sidebar-item-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-item-controls {
+  display: none;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-item-wrapper:hover .sidebar-item-controls {
+  display: flex;
+  opacity: 1;
+}
+
+.sidebar-item-control {
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted, #666);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.sidebar-item-control:hover {
+  color: var(--color-text);
+  background: var(--color-surface, rgba(0, 0, 0, 0.05));
+}
+
+.sidebar-item-control.danger:hover {
+  color: #ef4444;
+}
+
+.sidebar-item-control svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* Add Button */
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px dashed var(--color-border, #e5e5e5);
+  border-radius: 4px;
+  color: var(--color-text-muted, #666);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.add-button:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.add-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Edit Mode Indicator */
+.edit-mode-indicator {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent, #3b82f6);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Rich Text Editor in Edit Mode */
+.edit-mode-editor {
+  margin-top: 16px;
+}
+
+.edit-mode-editor .rich-text-editor {
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Delete Confirmation */
+.delete-confirm {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.delete-confirm span {
+  font-size: 0.85rem;
+  color: #ef4444;
+}
+
+.delete-confirm button {
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-confirm-yes {
+  background: #ef4444;
+  color: white;
+  border: none;
+}
+
+.delete-confirm-no {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border, #e5e5e5);
+}

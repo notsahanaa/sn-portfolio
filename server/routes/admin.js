@@ -8,6 +8,78 @@ const router = express.Router();
 // All admin routes require authentication
 router.use(authenticateToken);
 
+// ============ META ENDPOINTS ============
+
+// GET /api/admin/writes/meta - Get writes heading/subheading
+router.get('/writes/meta', async (req, res) => {
+  try {
+    const data = await readData();
+    res.json({
+      heading: data.writes.heading || 'writes',
+      subheading: data.writes.subheading || ''
+    });
+  } catch (error) {
+    console.error('Error reading writes meta:', error);
+    res.status(500).json({ error: 'Failed to read writes meta' });
+  }
+});
+
+// PUT /api/admin/writes/meta - Update writes heading/subheading
+router.put('/writes/meta', async (req, res) => {
+  try {
+    const { heading, subheading } = req.body;
+    const data = await readData();
+
+    if (heading !== undefined) data.writes.heading = heading;
+    if (subheading !== undefined) data.writes.subheading = subheading;
+
+    await writeData(data);
+    res.json({
+      heading: data.writes.heading,
+      subheading: data.writes.subheading
+    });
+  } catch (error) {
+    console.error('Error updating writes meta:', error);
+    res.status(500).json({ error: 'Failed to update writes meta' });
+  }
+});
+
+// GET /api/admin/projects/meta - Get buildInPublic heading/subheading
+router.get('/projects/meta', async (req, res) => {
+  try {
+    const data = await readData();
+    res.json({
+      heading: data.buildInPublic.heading || 'things i build in public',
+      subheading: data.buildInPublic.subheading || ''
+    });
+  } catch (error) {
+    console.error('Error reading projects meta:', error);
+    res.status(500).json({ error: 'Failed to read projects meta' });
+  }
+});
+
+// PUT /api/admin/projects/meta - Update buildInPublic heading/subheading
+router.put('/projects/meta', async (req, res) => {
+  try {
+    const { heading, subheading } = req.body;
+    const data = await readData();
+
+    if (heading !== undefined) data.buildInPublic.heading = heading;
+    if (subheading !== undefined) data.buildInPublic.subheading = subheading;
+
+    await writeData(data);
+    res.json({
+      heading: data.buildInPublic.heading,
+      subheading: data.buildInPublic.subheading
+    });
+  } catch (error) {
+    console.error('Error updating projects meta:', error);
+    res.status(500).json({ error: 'Failed to update projects meta' });
+  }
+});
+
+// ============ PROJECTS ENDPOINTS ============
+
 // GET /api/admin/projects - List ALL projects (including hidden)
 router.get('/projects', async (req, res) => {
   try {
@@ -196,7 +268,7 @@ router.get('/writes', async (req, res) => {
 // POST /api/admin/writes - Create topic
 router.post('/writes', async (req, res) => {
   try {
-    const { name, slug, description, visible } = req.body;
+    const { name, slug, description, content, visible } = req.body;
 
     if (!name || !slug) {
       return res.status(400).json({ error: 'Name and slug are required' });
@@ -217,9 +289,9 @@ router.post('/writes', async (req, res) => {
       slug,
       name,
       description: description || '',
+      content: content || '',
       visible: visible !== false,
-      order: maxOrder + 1,
-      sections: []
+      order: maxOrder + 1
     };
 
     data.writes.topics.push(newTopic);
@@ -242,7 +314,7 @@ router.put('/writes/:id', async (req, res) => {
       return res.status(404).json({ error: 'Topic not found' });
     }
 
-    const { name, slug, description, visible, order } = req.body;
+    const { name, slug, description, content, visible, order } = req.body;
 
     // Check slug uniqueness if changing
     if (slug && slug !== topic.slug) {
@@ -254,6 +326,7 @@ router.put('/writes/:id', async (req, res) => {
 
     if (name !== undefined) topic.name = name;
     if (description !== undefined) topic.description = description;
+    if (content !== undefined) topic.content = content;
     if (visible !== undefined) topic.visible = visible;
     if (order !== undefined) topic.order = order;
 

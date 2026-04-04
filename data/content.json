@@ -1,36 +1,40 @@
 {
   "writes": {
+    "heading": "writes",
+    "subheading": "long form thoughts on technology, creativity, and building things",
     "topics": [
       {
         "id": "d1fc98af-236c-4a4f-9c30-fbb5c383e1d3",
         "slug": "ai-and-self-actualization",
         "name": "AI & Self Actualization",
         "description": "A lot of people doomsday over Agentic AI. Over how AI is going to take over our jobs. I'm an optimist. Optimist? I'm actually excited as hell by Agentic ai. I think it brings us close to creative self-actualization. ",
+        "content": "",
         "visible": true,
-        "order": 1,
-        "sections": []
+        "order": 1
       },
       {
         "id": "b0f0e42c-e8f2-4c75-a330-a5f360b5d74b",
         "slug": "ai-and-aesthetics",
         "name": "AI & Aesthetics",
         "description": "test",
+        "content": "",
         "visible": true,
-        "order": 2,
-        "sections": []
+        "order": 2
       },
       {
         "id": "2fc55777-2c54-4789-ab11-51580262da2a",
         "slug": "test",
         "name": "test",
         "description": "test",
+        "content": "",
         "visible": true,
-        "order": 3,
-        "sections": []
+        "order": 3
       }
     ]
   },
   "buildInPublic": {
+    "heading": "things i build in public",
+    "subheading": "i tinker and build for fun and share them on X. here's a collection of everything i've built in public.",
     "projects": [
       {
         "id": "ba477d15-2cde-40e7-a828-25c05f47043d",
@@ -42,7 +46,7 @@
         "status": "idea",
         "link": "",
         "visible": true,
-        "likes": 0,
+        "likes": 1,
         "tweets": [
           {
             "id": "4acde437-3fb4-4ff6-9aaa-8dd48d465c7d",

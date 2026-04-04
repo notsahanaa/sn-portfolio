@@ -32,6 +32,8 @@ export const getProjects = () => request('/projects');
 
 export const getProject = (slug) => request(`/projects/${slug}`);
 
+export const getProjectsPageMeta = () => request('/projects/meta');
+
 export const likeProject = (slug) => request(`/projects/${slug}/like`, { method: 'POST' });
 
 // Auth
@@ -42,6 +44,25 @@ export const login = (password) =>
   });
 
 // Admin endpoints
+
+// Meta endpoints
+export const getWritesMeta = () => request('/admin/writes/meta');
+
+export const updateWritesMeta = (data) =>
+  request('/admin/writes/meta', {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+
+export const getProjectsMeta = () => request('/admin/projects/meta');
+
+export const updateProjectsMeta = (data) =>
+  request('/admin/projects/meta', {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+
+// Projects
 export const getAdminProjects = () => request('/admin/projects');
 
 export const createProject = (data) =>
@@ -74,6 +95,8 @@ export const removeTweet = (projectId, tweetId) =>
 export const getTopics = () => request('/writes');
 
 export const getTopic = (slug) => request(`/writes/${slug}`);
+
+export const getWritesPageMeta = () => request('/writes/meta');
 
 // Admin - Topics
 export const getAdminTopics = () => request('/admin/writes');

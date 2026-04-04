@@ -94,12 +94,37 @@
 .project-detail {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  height: calc(100vh - 8rem);
 }
 
-.project-header h2 {
-  font-size: 1.8rem;
+.project-header {
+  flex-shrink: 0;
+  border: none;
+}
+
+.posts-section {
+  flex: 1;
+  overflow-y: auto;
+  border: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.posts-section::-webkit-scrollbar {
+  display: none;
+}
+
+.project-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.project-title-row h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0;
 }
 
 .project-description {
@@ -114,7 +139,6 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 0.9rem;
-  margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 
@@ -122,19 +146,14 @@
   color: var(--color-border);
 }
 
-.status-badge {
-  padding: 0.25rem 0.75rem;
-  font-size: 0.8rem;
+.status-text {
+  font-size: 0.9rem;
   text-transform: lowercase;
-  background: var(--color-bg-secondary);
-  border-radius: 4px;
 }
 
-.status-in-progress { color: var(--color-success); }
-.status-idea { color: var(--color-link); }
-.status-paused { color: #f59e0b; }
-.status-completed { color: #8b5cf6; }
-.status-abandoned { color: var(--color-muted); }
+.status-active { color: var(--color-success); }
+.status-building { color: #f59e0b; }
+.status-paused { color: var(--color-muted); }
 
 .date-range {
   color: var(--color-muted);
@@ -149,22 +168,113 @@
   color: var(--color-heading);
 }
 
-.project-actions {
-  padding-top: 1rem;
+/* Edit mode styles */
+.status-select,
+.date-input {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-body);
+}
+
+.status-select:focus,
+.date-input:focus {
+  outline: none;
+  border-color: var(--color-heading);
+}
+
+.hidden-indicator {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+/* Add tweet section */
+.add-tweet-section {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.add-tweet-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-body);
+}
+
+.add-tweet-input:focus {
+  outline: none;
+  border-color: var(--color-heading);
+}
+
+.add-tweet-button {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-heading);
+  color: var(--color-bg);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.add-tweet-button:hover {
+  opacity: 0.9;
+}
+
+/* Tweet wrapper for delete button */
+.tweet-wrapper {
+  position: relative;
+}
+
+.remove-tweet-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+  z-index: 10;
+}
+
+.tweet-wrapper:hover .remove-tweet-button {
+  opacity: 1;
+}
+
+.remove-tweet-button:hover {
+  color: #ef4444;
+  border-color: #ef4444;
 }
 
 /* Posts section */
-.posts-section h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border-light);
-}
-
 .posts-timeline {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  border: none;
+  padding-top: 1rem;
 }
 
 /* Empty and loading states */
@@ -235,6 +345,14 @@
     border-left: none;
     border-top: 1px solid var(--color-border);
     padding-top: 2rem;
+  }
+
+  .project-detail {
+    height: auto;
+  }
+
+  .posts-section {
+    overflow-y: visible;
   }
 
   .project-meta {

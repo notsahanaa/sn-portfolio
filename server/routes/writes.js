@@ -3,15 +3,29 @@ import { readData, getVisibleTopics, findTopicBySlug } from '../data.js';
 
 const router = express.Router();
 
+// GET /api/writes/meta - Get writes page heading/subheading (public)
+router.get('/meta', async (req, res) => {
+  try {
+    const data = await readData();
+    res.json({
+      heading: data.writes.heading || 'writes',
+      subheading: data.writes.subheading || ''
+    });
+  } catch (error) {
+    console.error('Error reading writes meta:', error);
+    res.status(500).json({ error: 'Failed to read writes meta' });
+  }
+});
+
 // GET /api/writes - List visible topics
 router.get('/', async (req, res) => {
   try {
     const data = await readData();
     const topics = getVisibleTopics(data);
-    // Return topics without full section content for list view
-    const topicsWithoutContent = topics.map(({ sections, ...topic }) => ({
+    // Return topics without full content for list view
+    const topicsWithoutContent = topics.map(({ content, ...topic }) => ({
       ...topic,
-      sectionCount: sections?.length || 0
+      hasContent: !!content && content.trim().length > 0
     }));
     res.json(topicsWithoutContent);
   } catch (error) {
@@ -20,7 +34,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/writes/:slug - Get single topic with sections
+// GET /api/writes/:slug - Get single topic with content
 router.get('/:slug', async (req, res) => {
   try {
     const data = await readData();
@@ -30,13 +44,7 @@ router.get('/:slug', async (req, res) => {
       return res.status(404).json({ error: 'Topic not found' });
     }
 
-    // Sort sections by order
-    const sortedTopic = {
-      ...topic,
-      sections: (topic.sections || []).sort((a, b) => a.order - b.order)
-    };
-
-    res.json(sortedTopic);
+    res.json(topic);
   } catch (error) {
     console.error('Error reading topic:', error);
     res.status(500).json({ error: 'Failed to read topic' });

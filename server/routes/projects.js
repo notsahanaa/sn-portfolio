@@ -3,6 +3,20 @@ import { readData, writeData, getVisibleProjects, findProjectBySlug } from '../d
 
 const router = express.Router();
 
+// GET /api/projects/meta - Get projects page heading/subheading (public)
+router.get('/meta', async (req, res) => {
+  try {
+    const data = await readData();
+    res.json({
+      heading: data.buildInPublic.heading || 'things i build in public',
+      subheading: data.buildInPublic.subheading || ''
+    });
+  } catch (error) {
+    console.error('Error reading projects meta:', error);
+    res.status(500).json({ error: 'Failed to read projects meta' });
+  }
+});
+
 // GET /api/projects - List visible projects
 router.get('/', async (req, res) => {
   try {

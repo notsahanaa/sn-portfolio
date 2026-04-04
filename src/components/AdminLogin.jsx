@@ -15,8 +15,7 @@ function AdminLogin({ onLogin }) {
 
     try {
       const { token } = await login(password)
-      localStorage.setItem('adminToken', token)
-      onLogin()
+      onLogin(token)
     } catch (err) {
       setError(err.message || 'Invalid password')
     } finally {
